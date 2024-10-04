@@ -7,7 +7,7 @@ def batch_comp_on_list(block_size=10000):
     def decorator(func):
 
         def inner(data, *args, **kwargs):
-            nobs = data.shape[0]
+            nobs = len(data)
             lo = 0
             niter = (nobs // block_size) + (0 if nobs % block_size == 0 else 1)
             results = [None for _ in range(niter)]
