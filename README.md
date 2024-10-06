@@ -18,8 +18,8 @@ AMINO_ACIDS = [aa for aa in CODON_TABLE.values() if aa != '*']
 Utility functions to retrieve protein/nucleotide sequences from NCBI Entrez and write to fasta. Wrapper around `Bio.Entrez.efetch`
 and `Bio.SeqIO.write`. 
 ``` python
-from aprkh_utils import fetch_seqs
-from aprkh_utils import write_fasta
+from aprkh_utils.seqio import fetch_seqs
+from aprkh_utils.seqio import write_fasta
 
 # names of two protein sequences
 seq_ids = ['NP_001361173.1', 'NP_001341538.1']
@@ -138,6 +138,8 @@ def fetch_seq(accession, **kwargs):
     ...
 ```
 
+Note that this utility is already implemented in `aprkh_utils.seqio`. 
+
 ## Batching operations 
 
 Sometimes we only want to process chunks of data at a time, perhaps because we have to create intermediate objects when processing 
@@ -220,3 +222,4 @@ accession_list = ['NP_001361173.1', 'NP_001341538.1', ...] # 1000s of sequences
 seqs = fetch_seqs(accession_list)
 ```
 
+Note that this utility is already implemented (with batching and delaying) in `aprkh_utils.seqio`. 
