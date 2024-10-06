@@ -59,7 +59,7 @@ def fetch_seqs(db, id, rettype='fasta', retmode='text', parser=None):
 
 
 @batch_comp_on_list(block_size=150)
-@delay(limit=0.35, time_delay=0.5):
+@delay(limit=0.35, time_delay=0.5)
 def _fetch_seqs(id, db, rettype, retmode, parser):
     if not parser:
         if rettype == 'fasta' and retmode == 'text':
