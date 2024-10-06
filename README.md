@@ -52,7 +52,7 @@ def random_protein(n, L):
     # makes n random proteins of size L
     blah blah blah
 
-# make various amounts of random proteins of length 1000
+# make various numbers of random proteins of length 1000
 random_protein(10, 1000)
 random_protein(100, 1000)
 random_protein(1000, 1000)
