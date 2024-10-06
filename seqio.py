@@ -73,7 +73,6 @@ def _fetch_seqs(db, id, rettype, retmode, parser):
 
 def parse_entrez_fasta_output(s):
     ssss = '\n'.join(list(filter(lambda sss: len(sss) > 0, [ss.strip() for ss in s.split('\n')])))
-    print(ssss)
     records = SeqIO.parse(StringIO(ssss), 'fasta')
     return [(r.id, str(r.seq)) for r in records]
 
