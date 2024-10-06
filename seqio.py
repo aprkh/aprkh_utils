@@ -1,12 +1,20 @@
 
 from . import stringops
 
+from io import StringIO
+
 from Bio import SeqIO
 from Bio.Seq import Seq 
 from Bio.SeqRecord import SeqRecord 
 
+from Bio.Entrez import efetch
+from Bio import Entrez
+
+from urllib.error import HTTPError
+
 
 def main():
+    print(Entrez.email)
     seqs = {'seq1': 'aaccggtt',
             'seq2': 'aaccggt',
             'seq3': 'aaccggttt'}
@@ -39,6 +47,24 @@ def write_fasta(seqs, outfile, n=80):
         for header, seq in seqs:
             print(f'>{header}', file=fout)
             print('\n'.join(stringops.chop(seq, n)), file=fout)
+
+
+def fetch_seqs(db, id, rettype='fasta', retmode='text', parser=None):
+    if not parser:
+        if rettype == 'fasta' and retmode == 'text':
+            parser = parse_entrez_fasta_output
+    assert parser is not None
+    try:
+        seqs = efetch(db=db, id=id, rettype=rettype, retmode=retmode).read()
+    except HTTPError:
+        return None
+    return parser(seqs)
+
+
+def parse_entrez_fasta_output(s):
+    ssss = '\n'.join(list(filter(lambda sss: len(sss) > 0, [ss.strip() for ss in s.split('\n')])))
+    records = SeqIO.parse(StringIO(s), 'fasta')
+    return {r.id: str(r.seq) for r in records}
 
 
 if __name__ == '__main__': 
