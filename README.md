@@ -1,6 +1,9 @@
 This repo contains many functions I've found useful and used over and over and got tired of writing over and over again. Mostly in python. 
 
 For now, one can import functions by 
+``` bash
+git clone 
+```
 ``` python
 import sys
 sys.path.append('/path/to/parent/directory/of/aprkh_utils')
