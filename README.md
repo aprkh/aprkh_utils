@@ -86,7 +86,8 @@ accessions = ['NP_001361173.1', 'NP_001341538.1', ...]
 for accession in accessions:
     seq = fetch_seq(accession, db='protein', retmode='text', rettype='fasta')
     if seq is not None:
-        # might take a long time
+        # might take a long time (e.g., long protein sequence), in which case no reason to sleep
+        # but might also not take that long (e.g., short protein sequence), in which case we'd want to sleep. 
     time.sleep(1)
 ```
 
@@ -131,7 +132,7 @@ A = [list of data]
 process_list(A)
 ```
 
-Contrived toy example: 
+### Contrived toy example: 
 ``` python
 import numpy as np
 A = np.array([1, 2, 3, 4, 5, 6, 8, 9, 10])
@@ -168,4 +169,21 @@ from functools import reduce
 result = reduce(np.append, add_one(A))
 ```
 
+### A more useful example (also an example of stacking decorators)
+The `efetch` utility allows us to retrieve multiple sequences with each query, but only up to about 200 at a time. In this case, we can 
+combine the functionalities of the `delay` and `batch_comp_on_list` decorators if we have to query 1000's of sequences.
+
+``` python
+@batch_comp_on_list(block_size=150)  # query 150 sequences at a time
+@delay(limit=0.35, time_delay=0.35)  # ensure not too many calls/second
+def fetch_seqs(accession_list):
+    try:
+        seq = efetch(id=accession_list, **kwargs).read()
+    except:
+        return None
+    return seq
+
+accession_list = ['NP_001361173.1', 'NP_001341538.1', ...] # 1000s of sequences
+seqs = fetch_seqs(accession_list)
+```
 
