@@ -10,7 +10,8 @@ import sys
 sys.path.append('/path/to/parent/directory/of/aprkh_utils')
 ```
 
-Some examples below. 
+
+# Examples below. 
 
 Table of amino acids. Useful 
 ``` python
