@@ -1,6 +1,5 @@
 
-from .seqio import write_fasta
-from .seqio import fetch_seqs
+from . import seqio 
 from . import stringops
 from . import misc
 from .listops import batch_list
