@@ -53,6 +53,7 @@ def random_protein(n, L):
     Makes n random proteins of size L.
     """
     seqs = {}
+
     for _ in range(n):
         # make a random name for the protein
         name = 'NP_' + ''.join(map(str, np.random.choice(10, size=10, replace=True)))
