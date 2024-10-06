@@ -53,13 +53,14 @@ def write_fasta(seqs, outfile, n=80):
 
 
 def fetch_seqs(db, id, rettype='fasta', retmode='text', parser=None):
-    batches = reduce(lambda x, y: x + y, _fetch_seqs(db, id, rettype, retmode, parser))
+    # must switch order of input in backend to accomodate batch decorator
+    batches = reduce(lambda x, y: x + y, _fetch_seqs(id, db, rettype, retmode, parser))
     return {name: seq for name, seq in batches}
 
 
-@batch_comp_on_list()
-@delay(limit=0.35, time_delay=0.35)
-def _fetch_seqs(db, id, rettype, retmode, parser):
+@batch_comp_on_list(block_size=150)
+@delay(limit=0.35, time_delay=0.5):
+def _fetch_seqs(id, db, rettype, retmode, parser):
     if not parser:
         if rettype == 'fasta' and retmode == 'text':
             parser = parse_entrez_fasta_output
