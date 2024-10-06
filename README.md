@@ -78,7 +78,7 @@ amount of time we'll wait if try to call the function again too soon.
 
 Example: we only want to call the function `foo` at most once per second. 
 
-```
+``` python
 @delay(limit=1.0, time_delay=1.0)
 def foo():
     print("hello, world")
