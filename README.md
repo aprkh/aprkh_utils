@@ -1,5 +1,11 @@
 This repo contains many functions I've found useful and used over and over and got tired of writing over and over again. Mostly in python. 
 
+For now, one can import packages by 
+``` python
+import sys
+sys.path.append('/path/to/parent/directory/of/aprkh_utils')
+```
+
 Some examples below. 
 
 Table of amino acids. Useful 
@@ -7,6 +13,24 @@ Table of amino acids. Useful
 # keys are codons, values are amino acids, '*' for termination
 from aprkh_utils.misc import CODON_TABLE
 AMINO_ACIDS = [aa for aa in CODON_TABLE.values() if aa != '*']
+```
+
+Utility functions to retrieve protein/nucleotide sequences from NCBI Entrez and write to fasta. Wrapper around `Bio.Entrez.efetch`
+and `Bio.SeqIO.write`. 
+``` python
+from aprkh_utils import fetch_seqs
+from aprkh_utils import write_fasta
+
+# names of two protein sequences
+seq_ids = ['NP_001361173.1', 'NP_001341538.1']
+
+# fetch sequences
+seqs = fetch_seqs(db='protein', id=seq_ids)
+```
+
+Returned object is a dictionary mapping `name -> seq`. To save to a file `out.fasta`:
+``` python
+write_fasta(seq, 'out.fasta')
 ```
 
 # Useful decorators
@@ -23,12 +47,21 @@ def random_protein(n, L):
     # makes n random proteins of size L
     blah blah blah
 
+# make various amounts of random proteins of length 1000
+random_protein(10, 1000)
 random_protein(100, 1000)
+random_protein(1000, 1000)
+random_protein(10000, 1000)
+random_protein(100000, 1000)
 ```
 
 The output will be:
 ```
-random_protein took 0.010 seconds to run
+random_protein took 0.001 seconds to run.
+random_protein took 0.010 seconds to run.
+random_protein took 0.096 seconds to run.
+random_protein took 0.963 seconds to run.
+random_protein took 9.544 seconds to run.
 ```
 
 ## Delay between function calls
