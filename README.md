@@ -88,7 +88,7 @@ for i in range(3):
     foo()
 ```
 
-However, if `foo` takes longer than one second to run, then we won't have to wait before calling it again. 
+However, if `foo` takes longer than one second to run, then won't wait before calling it again. 
 
 ### Example: Querying from NCBI Database
 A good example of when this is useful is querying data from NCBI using the Entrez utility, which has a limit of 3 queries/second. 
