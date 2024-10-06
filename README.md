@@ -2,8 +2,9 @@ This repo contains many functions I've found useful and used over and over and g
 
 For now, one can import functions by 
 ``` bash
-git clone 
+git clone https://github.com/aprkh/aprkh_utils.git  # or however you import git repos
 ```
+Then in python:
 ``` python
 import sys
 sys.path.append('/path/to/parent/directory/of/aprkh_utils')
