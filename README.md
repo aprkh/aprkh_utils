@@ -9,11 +9,12 @@ from aprkh_utils.misc import CODON_TABLE
 AMINO_ACIDS = [aa for aa in CODON_TABLE.values() if aa != '*']
 ```
 
-
 # Useful decorators
 
 ## Timing function execution. 
-Use the `fn_timer` as a decorator. Example: timing how long it takes to construct a certain number of random protein sequences.
+Use the `fn_timer` as a decorator. Useful for code profiling.
+
+Example: timing how long it takes to construct a certain number of random protein sequences.
 ``` python
 from aprkh_utils.decorators import fn_timer
 
