@@ -47,12 +47,20 @@ def random_protein(n, L):
     # makes n random proteins of size L
     blah blah blah
 
+random_protein(10, 1000)
 random_protein(100, 1000)
+random_protein(1000, 1000)
+random_protein(10000, 1000)
+random_protein(100000, 1000)
 ```
 
 The output will be:
 ```
-random_protein took 0.010 seconds to run
+random_protein took 0.001 seconds to run.
+random_protein took 0.010 seconds to run.
+random_protein took 0.096 seconds to run.
+random_protein took 0.963 seconds to run.
+random_protein took 9.544 seconds to run.
 ```
 
 ## Delay between function calls
