@@ -23,6 +23,8 @@ from aprkh_utils import write_fasta
 
 # names of two protein sequences
 seq_ids = ['NP_001361173.1', 'NP_001341538.1']
+
+# fetch sequences
 seqs = fetch_seqs(db='protein', id=seq_ids)
 ```
 
