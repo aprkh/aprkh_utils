@@ -169,7 +169,7 @@ from functools import reduce
 result = reduce(np.append, add_one(A))
 ```
 
-### A more useful case
+### A more useful example (also an example of stacking decorators)
 The `efetch` utility allows us to retrieve multiple sequences with each query, but only up to about 200 at a time. In this case, we can 
 combine the functionalities of the `delay` and `batch_comp_on_list` decorators if we have to query 1000's of sequences.
 
