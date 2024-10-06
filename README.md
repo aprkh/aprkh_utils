@@ -180,7 +180,6 @@ A = np.array([1, 2, 3, 4, 5, 6, 8, 9, 10])
 def add_one(A):
     if len(A) > 5:
         print("ERROR!!!"); exit()
-    
     return A + 1
 
 # will crash
@@ -196,7 +195,6 @@ A = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 def add_one(A):
     if len(A) > 5:
         print("ERROR!!!"); exit()
-    
     return A + 1
 
 # now works, output is a list of results over each block
