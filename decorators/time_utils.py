@@ -16,7 +16,8 @@ def main():
 def delay(limit=1.0, time_delay=1.0):
 
     def decorator(func):
-        state = {'prev_call': time.time()}
+        # initializing to limit will ensure no delay on the first call
+        state = {'prev_call': limit}
 
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -27,9 +28,11 @@ def delay(limit=1.0, time_delay=1.0):
             if abs(now - prev_call) < limit:
                 time.sleep(time_delay)
 
+            result = func(*args, **kwargs)
+
             state['prev_call'] = time.time()
 
-            return func(*args, **kwargs)
+            return result
 
         return wrapper
 
