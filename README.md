@@ -225,4 +225,4 @@ accession_list = ['NP_001361173.1', 'NP_001341538.1', ...] # 1000s of sequences
 seqs = fetch_seqs(accession_list)
 ```
 
-Note that this utility is already implemented (with batching and delaying) in `aprkh_utils.seqio`. 
+Note, again, that this utility is already implemented (with the batching and delaying functionality) in `aprkh_utils.seqio`. 
