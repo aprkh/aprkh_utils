@@ -1,7 +1,10 @@
 
 from . import stringops
+from .decorators import batch_comp_on_list
+from .decorators import delay
 
 from io import StringIO
+from functools import reduce
 
 from Bio import SeqIO
 from Bio.Seq import Seq 
@@ -50,6 +53,13 @@ def write_fasta(seqs, outfile, n=80):
 
 
 def fetch_seqs(db, id, rettype='fasta', retmode='text', parser=None):
+    batches = reduce(lambda x, y: x + y, _fetch_seqs(db, id, rettype, retmode, parser))
+    return {name: seq for name, seq in batches}
+
+
+@batch_comp_on_list()
+@delay(limit=0.35, time_delay=0.35)
+def _fetch_seqs(db, id, rettype, retmode, parser):
     if not parser:
         if rettype == 'fasta' and retmode == 'text':
             parser = parse_entrez_fasta_output
@@ -63,8 +73,9 @@ def fetch_seqs(db, id, rettype='fasta', retmode='text', parser=None):
 
 def parse_entrez_fasta_output(s):
     ssss = '\n'.join(list(filter(lambda sss: len(sss) > 0, [ss.strip() for ss in s.split('\n')])))
-    records = SeqIO.parse(StringIO(s), 'fasta')
-    return {r.id: str(r.seq) for r in records}
+    print(ssss)
+    records = SeqIO.parse(StringIO(ssss), 'fasta')
+    return [(r.id, str(r.seq)) for r in records]
 
 
 if __name__ == '__main__': 
